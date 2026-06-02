@@ -1,4 +1,4 @@
-# Just Be Rich — Cloudflare Pages
+# Just Be Rich — Cloudflare Pages Cool
 
 This project is deployed on Cloudflare Pages with KV storage for the shared watchlist.
 
