@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Just Be Rich — Market Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4ecd8;            /* warm ivory parchment */
+    --bg-2:#ece0c4;
+    --panel:#fffaf0;         /* cream card */
+    --panel-2:#f6eed9;
+    --ink:#1c2a22;           /* deep forest ink */
+    --ink-soft:#3d4f43;
+    --muted:#8a7d5f;         /* aged gold-brown */
+    --line:#d8c79c;          /* gilt line */
+    --green:#0f5132;         /* boardroom green */
+    --green-deep:#0a3a24;
+    --gold:#bf9b30;          /* money gold */
+    --gold-bright:#e6c34d;
+    --up:#0f7a3d;
+    --up-bg:#d8ecd9;
+    --down:#b3261e;
+    --down-bg:#f4dcd8;
+    --neutral:#7c6f9b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:18px;min-height:100vh;-webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 15% 5%, rgba(191,155,48,.18), transparent 42%),
+      radial-gradient(circle at 85% 95%, rgba(15,81,50,.12), transparent 48%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23bf9b30' stroke-opacity='.04' stroke-width='1'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px 90px}
+
+  /* MASTHEAD */
+  header.mast{
+    border-bottom:4px double var(--green);padding:34px 0 22px;margin-bottom:24px;
+    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:18px;position:relative;
+  }
+  .brand h1{font-family:'Playfair Display',serif;font-weight:900;font-size:58px;letter-spacing:-1px;line-height:.9;color:var(--green-deep);text-shadow:1px 1px 0 var(--gold-bright)}
+  .brand h1 span{color:var(--gold);font-style:italic}
+  .brand p{color:var(--muted);font-size:15px;margin-top:8px;font-family:'IBM Plex Mono',monospace;letter-spacing:1px;text-transform:uppercase}
+  .clock{font-family:'IBM Plex Mono',monospace;text-align:right;font-size:13px;color:var(--muted)}
+  .clock b{color:var(--green-deep);font-size:24px;display:block;letter-spacing:.5px}
+  .clock .stat{display:inline-flex;align-items:center;gap:6px;margin-top:6px}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);display:inline-block}
+  .dot.live{background:var(--up);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(15,122,61,.5)}70%{box-shadow:0 0 0 8px rgba(15,122,61,0)}100%{box-shadow:0 0 0 0 rgba(15,122,61,0)}}
+
+  /* QUOTE */
+  .quote-banner{
+    background:linear-gradient(110deg,var(--green),var(--green-deep));color:#f4ecd8;
+    border:2px solid var(--gold);border-radius:6px;padding:22px 30px;margin-bottom:30px;
+    display:flex;align-items:center;gap:20px;animation:rise .6s ease both;
+    box-shadow:0 8px 24px rgba(15,81,50,.25),inset 0 0 0 4px rgba(191,155,48,.25);
+  }
+  .quote-banner .mark{font-family:'Playfair Display',serif;font-size:64px;font-style:italic;color:var(--gold-bright);line-height:.5;flex-shrink:0}
+  .quote-banner q{font-family:'Playfair Display',serif;font-style:italic;font-size:24px;font-weight:700;line-height:1.25;quotes:none}
+  .quote-banner .by{display:block;margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--gold-bright);text-transform:uppercase}
+
+  .err{background:var(--down-bg);color:var(--down);border:1px solid var(--down);border-radius:6px;padding:12px 16px;font-size:15px;margin-bottom:16px;font-family:'IBM Plex Mono',monospace}
+
+  /* SECTION HEADERS */
+  h2.sect{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;letter-spacing:-.5px;color:var(--green-deep)}
+  h2.sect em{color:var(--gold);font-style:italic}
+  .section-label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+  .head-row{display:flex;justify-content:space-between;align-items:baseline;margin:8px 0 18px;border-bottom:1px solid var(--line);padding-bottom:8px}
+
+  /* HOT / NOT PANELS */
+  .hotnot{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:42px}
+  .hn-card{border:2px solid var(--gold);border-radius:8px;padding:0;overflow:hidden;background:var(--panel);box-shadow:0 6px 18px rgba(28,42,34,.08);animation:rise .5s ease both}
+  .hn-head{padding:16px 22px;color:#f4ecd8;font-family:'Playfair Display',serif}
+  .hn-head .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.85;display:block}
+  .hn-head .title{font-size:26px;font-weight:900;line-height:1;margin-top:4px}
+  .hn-head .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;opacity:.9}
+  .hot .hn-head{background:linear-gradient(120deg,var(--up),#0a5c2e)}
+  .not .hn-head{background:linear-gradient(120deg,var(--down),#7a1812)}
+  .hn-body{padding:8px 22px 18px}
+  .hn-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:18px}
+  .hn-row:last-child{border:none}
+  .hn-row .nm{font-weight:600}
+  .hn-row .etf{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);margin-left:8px}
+  .hn-row .v{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:16px}
+  .hot .hn-row .v{color:var(--up)}.not .hn-row .v{color:var(--down)}
+
+  /* SECTOR BOARD */
+  .sector-board{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:46px}
+  .sbox{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:13px 14px;position:relative;overflow:hidden;transition:.18s;animation:rise .4s ease both}
+  .sbox:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(28,42,34,.12)}
+  .sbox .bar{position:absolute;left:0;top:0;bottom:0;width:4px}
+  .sbox.up .bar{background:var(--up)}.sbox.down .bar{background:var(--down)}
+  .sbox .sname{font-size:15px;font-weight:600;color:var(--ink-soft);line-height:1.1}
+  .sbox .setf{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted)}
+  .sbox .sdp{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;margin-top:8px}
+  .sbox.up .sdp{color:var(--up)}.sbox.down .sdp{color:var(--down)}
+
+  /* WATCHLIST */
+  .controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:18px}
+  .add-row{display:flex;gap:8px}
+  input[type=text]{background:#fff;border:1px solid var(--line);color:var(--ink);padding:9px 13px;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-size:13px;min-width:140px}
+  input[type=text]:focus{outline:none;border-color:var(--gold)}
+  button{background:linear-gradient(var(--gold-bright),var(--gold));color:var(--green-deep);border:1px solid var(--gold);padding:9px 18px;border-radius:6px;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;cursor:pointer;transition:.15s;letter-spacing:.5px}
+  button:hover{filter:brightness(1.06)}
+  .synced{color:var(--up)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:46px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;position:relative;overflow:hidden;transition:.2s;animation:rise .5s ease both;box-shadow:0 4px 14px rgba(28,42,34,.07)}
+  .card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 24px rgba(28,42,34,.14)}
+  .card .accent{position:absolute;top:0;left:0;width:100%;height:4px;background:var(--neutral)}
+  .card.up .accent{background:var(--up)}.card.down .accent{background:var(--down)}
+  .card .tic{display:flex;justify-content:space-between;align-items:flex-start}
+  .sym{font-family:'Playfair Display',serif;font-weight:700;font-size:30px;letter-spacing:-.5px;color:var(--green-deep)}
+  .rmv{background:none;border:none;color:var(--muted);cursor:pointer;font-size:17px;padding:2px 6px}
+  .rmv:hover{color:var(--down)}
+  .price{font-family:'IBM Plex Mono',monospace;font-size:32px;font-weight:500;margin:10px 0 4px;color:var(--ink)}
+  .chg{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:7px}
+  .chg.up{color:var(--up)}.chg.down{color:var(--down)}
+  .pill{font-size:11px;padding:3px 9px;border-radius:20px;font-family:'IBM Plex Mono',monospace}
+  .pill.up{background:var(--up-bg);color:var(--up)}.pill.down{background:var(--down-bg);color:var(--down)}
+  .meta{display:flex;gap:18px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+  .meta b{color:var(--ink);font-weight:500;display:block;margin-top:2px;font-size:13px}
+  .spark{height:38px;width:100%;margin-top:12px}
+
+  /* NEWS WIRE w/ IMAGES */
+  .news-list{display:flex;flex-direction:column;gap:12px;margin-bottom:50px}
+  .nitem{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--neutral);border-radius:0 10px 10px 0;padding:0;display:flex;gap:0;align-items:stretch;transition:.18s;text-decoration:none;color:inherit;overflow:hidden;box-shadow:0 3px 10px rgba(28,42,34,.06)}
+  .nitem:hover{transform:translateX(4px);box-shadow:0 6px 16px rgba(28,42,34,.12)}
+  .nitem.good{border-left-color:var(--up)}.nitem.bad{border-left-color:var(--down)}
+  .nthumb{width:120px;flex-shrink:0;background:var(--bg-2) center/cover no-repeat;border-right:1px solid var(--line)}
+  .nbody{display:flex;gap:14px;align-items:flex-start;padding:15px 20px;flex:1}
+  .nsent{flex-shrink:0;width:58px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px}
+  .nsent .badge{display:block;font-size:20px;margin-bottom:3px}
+  .nsent.good{color:var(--up)}.nsent.bad{color:var(--down)}.nsent.neutral{color:var(--neutral)}
+  .ntext .nsym{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:1px;font-weight:600}
+  .ntext h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;line-height:1.3;margin:3px 0 6px;color:var(--ink)}
+  .ntext .nsource{font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace}
+
+  /* RECAP */
+  .recap{background:var(--panel);border:2px solid var(--gold);border-radius:10px;padding:28px 30px;margin-bottom:20px;box-shadow:0 6px 18px rgba(28,42,34,.08)}
+  .recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .recap-col h3{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+  .recap-col.win h3{color:var(--up)}.recap-col.lose h3{color:var(--down)}
+  .recap-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .recap-col li{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:18px}
+  .recap-col li:last-child{border:none}
+  .recap-col .v{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:16px}
+  .recap-col.win .v{color:var(--up)}.recap-col.lose .v{color:var(--down)}
+  .takeaway{background:linear-gradient(120deg,var(--green),var(--green-deep));color:#f4ecd8;border-radius:10px;padding:20px 24px;font-size:18px;line-height:1.55;border:2px solid var(--gold)}
+  .takeaway b.lbl{color:var(--gold-bright);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:1px;display:block;margin-bottom:6px;text-transform:uppercase}
+
+  .empty,.loading{text-align:center;color:var(--muted);padding:40px;font-family:'IBM Plex Mono',monospace;font-size:13px}
+  .footnote{color:var(--muted);font-size:14px;line-height:1.6;border-top:1px solid var(--line);padding-top:20px;margin-top:34px;font-family:'IBM Plex Mono',monospace}
+  .footnote b{color:var(--gold)}
+  @media(max-width:680px){.recap-grid,.hotnot{grid-template-columns:1fr}.brand h1{font-size:42px}.nthumb{width:80px}}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="brand">
+      <h1>Just Be <span>Rich</span></h1>
+      <p>// shared desk · live tape · plain-english signals</p>
+    </div>
+    <div class="clock">
+      <b id="clock">--:--:--</b>
+      <span class="stat"><span class="dot" id="statusDot"></span><span id="statusTxt">connecting…</span></span>
+    </div>
+  </header>
+
+  <div class="quote-banner">
+    <span class="mark">"</span>
+    <div>
+      <q>The average 25 year old has millions</q>
+      <span class="by">— Shivam</span>
+    </div>
+  </div>
+
+  <div id="errBox"></div>
+
+  <!-- HOT / NOT -->
+  <div class="head-row"><h2 class="sect">The <em>Standings</em></h2><span class="section-label">sector leaders &amp; laggards</span></div>
+  <div class="hotnot">
+    <div class="hn-card hot">
+      <div class="hn-head"><span class="tag">What's Hot</span><div class="title">Shashank's Body</div><div class="sub">today's strongest sectors</div></div>
+      <div class="hn-body" id="hot"><div class="loading">Flexing…</div></div>
+    </div>
+    <div class="hn-card not">
+      <div class="hn-head"><span class="tag">What's Not</span><div class="title">Shashank's Talent</div><div class="sub">today's weakest sectors</div></div>
+      <div class="hn-body" id="not"><div class="loading">Searching…</div></div>
+    </div>
+  </div>
+
+  <!-- FULL SECTOR BOARD -->
+  <div class="head-row"><h2 class="sect">Sector <em>Tape</em></h2><span class="section-label">all 11 · live %</span></div>
+  <div class="sector-board" id="sectorBoard"><div class="loading">Loading sectors…</div></div>
+
+  <!-- WATCHLIST -->
+  <div class="controls">
+    <span class="section-label">Shared watchlist · <span class="synced" id="syncLabel">syncing…</span></span>
+    <div class="add-row">
+      <input type="text" id="addInput" placeholder="add ticker (e.g. NVDA)" onkeydown="if(event.key==='Enter')addTicker()">
+      <button onclick="addTicker()">+ ADD</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"><div class="loading">Loading the desk…</div></div>
+
+  <!-- NEWS -->
+  <div class="head-row"><h2 class="sect">The <em>Wire</em></h2><span class="section-label">live photos · good vs bad</span></div>
+  <div class="news-list" id="news"><div class="loading">Fetching headlines…</div></div>
+
+  <!-- RECAP -->
+  <div class="head-row"><h2 class="sect">Today's <em>Read</em></h2></div>
+  <div class="recap">
+    <div class="recap-grid">
+      <div class="recap-col win"><h3>▲ What worked</h3><ul id="winners"><li>—</li></ul></div>
+      <div class="recap-col lose"><h3>▼ What hurt</h3><ul id="losers"><li>—</li></ul></div>
+    </div>
+  </div>
+  <div class="takeaway" id="takeaway"><b class="lbl">Desk note</b>Loading the read across your watchlist…</div>
+
+  <div class="footnote">
+    <b>Read me first.</b> "Good / bad" tags are a quick heuristic — green when news sentiment skews positive or price is up on the session, red when it skews negative. Sector hot/not is ranked by today's move in each sector ETF. This is a starting point for discussion, <b>not investment advice</b>. Treat tags as a prompt to read the actual article, not a verdict. Quotes can lag a few seconds on the free data tier.
+  </div>
+</div>
+
+<script>
+let tickers = [];
+let timer;
+const $ = id => document.getElementById(id);
+function clock(){const d=new Date();$('clock').textContent=d.toLocaleTimeString('en-US',{hour12:false});}
+setInterval(clock,1000);clock();
+function setStatus(live,txt){$('statusDot').className='dot'+(live?' live':'');$('statusTxt').textContent=txt;}
+function err(m){$('errBox').innerHTML=m?'<div class="err">'+m+'</div>':'';}
+
+/* shared watchlist */
+async function loadWatchlist(){
+  try{const r=await fetch('/api/watchlist');if(!r.ok)throw 0;const j=await r.json();tickers=j.tickers||[];$('syncLabel').textContent='shared · live';}
+  catch(e){tickers=['AAPL','NVDA','MSFT','TSLA','AMZN'];$('syncLabel').textContent='offline (defaults)';}
+}
+async function saveWatchlist(){try{await fetch('/api/watchlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tickers})});}catch(e){}}
+async function addTicker(){const t=$('addInput').value.trim().toUpperCase();if(!t||tickers.includes(t))return;tickers.push(t);$('addInput').value='';await saveWatchlist();render();}
+async function removeTicker(t){tickers=tickers.filter(x=>x!==t);await saveWatchlist();render();}
+
+/* data via proxy */
+async function quote(t){const r=await fetch('/api/quote?symbol='+encodeURIComponent(t));if(!r.ok)throw new Error('quote');return r.json();}
+async function companyNews(t){try{const r=await fetch('/api/news?symbol='+encodeURIComponent(t));if(!r.ok)return[];return (await r.json()).slice(0,3);}catch(e){return [];}}
+async function getSectors(){try{const r=await fetch('/api/sectors');if(!r.ok)return[];const j=await r.json();return j.sectors||[];}catch(e){return [];}}
+
+const GOODW=/beat|surge|jump|record|upgrade|raises|tops|growth|strong|wins|approval|rally|soar/i;
+const BADW=/miss|plunge|drop|cut|downgrade|probe|lawsuit|recall|warns|falls|weak|loss|slump|halt|fraud/i;
+function sentiment(h,dp){let s=0;if(GOODW.test(h))s++;if(BADW.test(h))s--;if(s===0&&typeof dp==='number')s=dp>0?1:dp<0?-1:0;return s>0?'good':s<0?'bad':'neutral';}
+function sparkline(o,c,h,l){const pts=[o,(o+h)/2,h,(h+l)/2,l,(l+c)/2,c];const min=Math.min(...pts),max=Math.max(...pts),rng=(max-min)||1,up=c>=o;const path=pts.map((p,i)=>(i/(pts.length-1))*100+','+(38-((p-min)/rng)*34-2)).join(' ');return '<svg class="spark" viewBox="0 0 100 38" preserveAspectRatio="none"><polyline points="'+path+'" fill="none" stroke="'+(up?'var(--up)':'var(--down)')+' " stroke-width="1.8"/></svg>';}
+
+async function renderSectors(){
+  const secs=await getSectors();
+  if(!secs.length){$('sectorBoard').innerHTML='<div class="empty">Sector data unavailable.</div>';return;}
+  $('sectorBoard').innerHTML=secs.map(s=>{const up=s.dp>=0;return '<div class="sbox '+(up?'up':'down')+'"><div class="bar"></div><div class="sname">'+s.name+'</div><div class="setf">'+s.etf+'</div><div class="sdp">'+(s.dp>=0?'+':'')+s.dp.toFixed(2)+'%</div></div>';}).join('');
+  const hot=secs.slice(0,3),not=secs.slice(-3).reverse();
+  $('hot').innerHTML=hot.map(s=>'<div class="hn-row"><span class="nm">'+s.name+'<span class="etf">'+s.etf+'</span></span><span class="v">'+(s.dp>=0?'+':'')+s.dp.toFixed(2)+'%</span></div>').join('');
+  $('not').innerHTML=not.map(s=>'<div class="hn-row"><span class="nm">'+s.name+'<span class="etf">'+s.etf+'</span></span><span class="v">'+(s.dp>=0?'+':'')+s.dp.toFixed(2)+'%</span></div>').join('');
+}
+
+async function render(){
+  const grid=$('grid');
+  let cards=[],dayData=[],allNews=[];
+  for(const t of tickers){
+    try{
+      const q=await quote(t);
+      if(!q||typeof q.c!=='number'||q.c===0)throw 0;
+      const up=q.dp>=0;dayData.push({t,dp:q.dp,d:q.d});;
+      cards.push('<div class="card '+(up?'up':'down')+'"><div class="accent"></div><div class="tic"><span class="sym">'+t+'</span><button class="rmv" onclick="removeTicker(\''+t+'\')" title="remove for everyone">✕</button></div><div class="price">$'+q.c.toFixed(2)+'</div><div class="chg '+(up?'up':'down')+'">\u25B2 '+(q.d>=0?'+':'')+(q.d||0).toFixed(2)+'<span class="pill '+(up?'up':'down')+'\">'+(q.dp>=0?'+':'')+( q.dp||0).toFixed(2)+'%</span></div>'+sparkline(q.o,q.c,q.h,q.l)+'<div class="meta"><span>Open<b>$'+(q.o||0).toFixed(2)+'</b></span><span>High<b>$'+(q.h||0).toFixed(2)+'</b></span><span>Low<b>$'+(q.l||0).toFixed(2)+'</b></span></div></div>');
+      const news=await companyNews(t);
+      news.forEach(n=>allNews.push({sym:t,headline:n.headline,source:n.source,url:n.url,image:n.image,s:sentiment(n.headline||'',q.dp),dt:n.datetime}));
+    }catch(e){
+      cards.push('<div class="card"><div class="accent"></div><div class="tic"><span class="sym">'+t+'</span><button class="rmv" onclick="removeTicker(\''+t+'\')\u0022>✕</button></div><div class="empty" style="padding:18px 0">No data for '+t+'.<br>Check the symbol.</div></div>');
+    }
+  }
+  grid.innerHTML=cards.join('')||'<div class="empty">No tickers yet. Add one above.</div>';
+
+  allNews.sort((a,b)=>(b.dt||0)-(a.dt||0));
+  $('news').innerHTML=allNews.length?allNews.slice(0,14).map(n=>{
+    const thumb=n.image?'<div class="nthumb" style="background-image:url(\''+n.image.replace(/'/g,"%27")+' \')\u0022></div>':'';
+    return '<a class="nitem '+n.s+'" href="'+(n.url||'#')+"" target="_blank" rel="noopener">'+thumb+'<div class="nbody"><div class="nsent '+n.s+'"><span class="badge">'+(n.s==='good'?'▲':n.s==='bad'?'▼':'■')+'</span>'+(n.s==='good'?'GOOD':n.s==='bad'?'BAD':'NEUTRAL')+'</div><div class="ntext"><span class="nsym">'+n.sym+'</span><h4>'+(n.headline||'(headline unavailable)')+'</h4><span class="nsource">'+(n.source||'—')+'</span></div></div></a>';
+  }).join(''):'<div class="empty">No recent headlines for these tickers.</div>';
+
+  const sorted=[...dayData].sort((a,b)=>b.dp-a.dp);
+  const wins=sorted.filter(d=>d.dp>0).slice(0,4);
+  const loss=sorted.filter(d=>d.dp<0).slice(-4).reverse();
+  $('winners').innerHTML=wins.length?wins.map(d=>'<li>'+d.t+'<span class="v">+'+d.dp.toFixed(2)+'%</span></li>').join(''):'<li style="color:var(--muted)">Nothing green right now</li>';
+  $('losers').innerHTML=loss.length?loss.map(d=>'<li>'+d.t+'<span class="v">'+d.dp.toFixed(2)+'%</span></li>').join(''):'<li style="color:var(--muted)">Nothing red right now</li>';
+  const avg=dayData.length?dayData.reduce((s,d)=>s+d.dp,0)/dayData.length:0;
+  const tone=avg>0.5?'risk-on — the watchlist is broadly bid':avg<-0.5?'risk-off — selling pressure across names':'mixed and choppy — no clear direction';
+  const best=sorted[0],worst=sorted[sorted.length-1];
+  $('takeaway').innerHTML='<b class="lbl">Desk note</b>The desk reads <b>'+tone+'</b>, average move '+(avg>=0?'+':'')+avg.toFixed(2)+'% across '+dayData.length+' names.'+(best?' Leader: <b>'+best.t+' '+(best.dp>=0?'+':'')+best.dp.toFixed(2)+'%</b>.':'')+(worst&&worst!==best?' Laggard: <b>'+worst.t+' '+worst.dp.toFixed(2)+'%</b>.:':'')+' Treat tags as conversation-starters, then read the wire before acting.';
+}
+
+async function boot(){
+  setStatus(true,'live · 15s refresh');
+  await loadWatchlist();
+  await Promise.all([render(),renderSectors()]);
+  clearInterval(timer);
+  timer=setInterval(()=>{render();renderSectors();},15000);
+  setInterval(async()=>{const before=tickers.join(',');await loadWatchlist();if(tickers.join(',')!==before)render();},30000);
+}
+boot();
+</script>
+</body>
+</html>

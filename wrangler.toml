@@ -1,0 +1,11 @@
+name = "just-be-rich"
+type = "javascript"
+main = "public/index.html"
+compatibility_date = "2024-01-01"
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[[kv_namespaces]]
+binding = "WATCHLIST_KV"
+id = "watchlist"
