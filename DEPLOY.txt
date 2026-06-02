@@ -1,0 +1,1 @@
+KV namespace bound - redeploy triggered
