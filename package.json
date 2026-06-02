@@ -1,25 +1,15 @@
 {
-  "name": "just-be-rich-api",
+  "name": "just-be-rich",
   "version": "1.0.0",
-  "description": "Market desk API server",
-  "main": "server.js",
+  "description": "Site for the bois",
+  "main": "functions/api/index.js",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "node-fetch": "^2.7.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "nodemon": "^3.0.1"
-  },
-  "engines": {
-    "node": "18.x"
+    "wrangler": "latest"
   }
 }
